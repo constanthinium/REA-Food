@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">РЭУ Еда</string>
+    <string name="login_your">Войти в свой аккаунт</string>
+    <string name="greeting">Рады видеть вас снова, введите свои данные ниже, чтобы начать заказ.</string>
+    <string name="skip">Пропустить</string>
+    <string name="page_1">Заказывайте в ваших любимых магазинах или у поставщиков</string>
+    <string name="page_2">Выбирайте из широкого ассортимента вкусных блюд</string>
+    <string name="page_3">Наслаждайтесь мгновенной доставкой и оплатой</string>
+    <string name="email">Введите адрес</string>
+    <string name="address">Адрес Почты</string>
+    <string name="enter_password">Введите пароль</string>
+    <string name="password">Пароль</string>
+    <string name="login_my">Войти в мой аккаунт</string>
+    <string name="retry">Повторить</string>
+    <string name="exit">Выйти</string>
+    <string name="error">Ошибка соединения</string>
+    <string name="internet">Проверьте свое соединение с интернетом</string>
+    <string name="create">Создать аккаунт</string>
+    <string name="logout">Выйти</string>
+    <string name="cart">Ваша корзина</string>
+    <string name="total">Всего</string>
+    <string name="pay">Перейти к оплате</string>
+    <string name="welcome">Добро пожаловать, введите свои данные, чтобы начать заказывать еду.</string>
+    <string name="google">Войти с Google</string>
+    <string name="cancel">Отмена</string>
+    <string name="forgot">Забыли пароль</string>
+    <string name="request">Введите свой адрес электронной почты, чтобы запросить сброс пароля.</string>
+    <string name="enjoy">Наслаждайтесь вкусной едой</string>
+    <string name="login">войти</string>
+    <string name="profile">Мой профиль</string>
+    <string name="name">Изменить имя</string>
+    <string name="change_email">Изменить адрес</string>
+    <string name="change_password">Изменить пароль</string>
+    <string name="reset">Сбросить Пароль</string>
+    <string name="sent">На вашу электронную почту был отправлен код сброса</string>
+    <string name="enter">Введите код</string>
+    <string name="delivery">Доставка в</string>
+</resources>
