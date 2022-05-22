@@ -4,7 +4,6 @@ import android.app.TimePickerDialog
 import android.content.Intent
 import android.net.Uri
 import android.util.Log
-import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -28,7 +27,6 @@ import ru.rea.food.R
 import ru.rea.food.ui.Button
 import ru.rea.food.ui.item.CartItem
 import ru.rea.food.ui.topbar.TopAppBar
-import ru.rea.food.ui.topbar.address
 import ru.rea.food.vm.MenuViewModel
 import java.text.SimpleDateFormat
 import java.util.*
@@ -85,42 +83,38 @@ fun CartScreen(
             }
             val context = LocalContext.current
             Button(text = stringResource(R.string.pay)) {
-                if (address.length < 10) {
-                    Toast.makeText(context, "Сначала укажите корректный адрес", Toast.LENGTH_SHORT)
-                        .show()
-                } else {
-                    val cal = Calendar.getInstance()
-                    TimePickerDialog(
-                        context,
-                        R.style.picker,
-                        { _, hour, minute ->
-                            cal.set(Calendar.HOUR_OF_DAY, hour)
-                            cal.set(Calendar.MINUTE, minute)
-                            cal.set(Calendar.SECOND, 0)
-                            val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-                            val time = formatter.format(cal.time)
-                            Log.d(TAG, "CartScreen: $time")
-                            GlobalScope.launch {
-                                // TODO: uncomment
-//                                val checkout = REAFoodService.instance.checkout(
-//                                    "Bearer ${viewModel.token}",
-//                                    time
-//                                )
-                                val checkout =
-                                    Checkout("https://3dsec.sberbank.ru/payment/merchants/sbersafe/mobile_payment_ru.html?mdOrder=8647d61d-5cff-72bc-8420-cdef5e38cb3f")
-                                context.startActivity(
-                                    Intent(
-                                        Intent.ACTION_VIEW,
-                                        Uri.parse(checkout.url)
-                                    )
+                val cal = Calendar.getInstance()
+                TimePickerDialog(
+                    context,
+                    R.style.picker,
+                    { _, hour, minute ->
+                        cal.set(Calendar.HOUR_OF_DAY, hour)
+                        cal.set(Calendar.MINUTE, minute)
+                        cal.set(Calendar.SECOND, 0)
+                        val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+                        val time = formatter.format(cal.time)
+                        Log.d(TAG, "CartScreen: $time")
+                        GlobalScope.launch {
+                            // TODO: make a real checkout
+//                            val checkout = REAFoodService.instance.checkout(
+//                                "Bearer ${viewModel.token}",
+//                                time
+//                            )
+                            val checkout =
+                                Checkout("https://3dsec.sberbank.ru/payment/merchants/sbersafe/mobile_payment_ru.html?mdOrder=8647d61d-5cff-72bc-8420-cdef5e38cb3f")
+                            context.startActivity(
+                                Intent(
+                                    Intent.ACTION_VIEW,
+                                    Uri.parse(checkout.url)
                                 )
-                            }
-                        },
-                        cal.get(Calendar.HOUR_OF_DAY),
-                        cal.get(Calendar.MINUTE),
-                        true
-                    ).show()
-                }
+                            )
+                        }
+                    },
+                    cal.get(Calendar.HOUR_OF_DAY),
+                    cal.get(Calendar.MINUTE),
+                    true
+                ).show()
+
             }
         }
     }

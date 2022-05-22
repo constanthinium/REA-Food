@@ -35,7 +35,6 @@
     <string name="reset">Сбросить Пароль</string>
     <string name="sent">На вашу электронную почту был отправлен код сброса</string>
     <string name="enter">Введите код</string>
-    <string name="delivery">Доставка в</string>
     <string name="enter_name">Введите имя</string>
     <string name="name">Имя</string>
     <string name="enter_email">Введите почту</string>

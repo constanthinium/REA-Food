@@ -17,8 +17,6 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import ru.rea.food.R
 
-var address by mutableStateOf("")
-
 @Composable
 fun TopAppBar(
     onClick: () -> Unit = {},
@@ -32,34 +30,6 @@ fun TopAppBar(
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         TopBarButton(onClick = onClick, icon = icon)
-        var dialog by remember { mutableStateOf(false) }
-        if (dialog) {
-            AlertDialog(
-                onDismissRequest = { dialog = false },
-                confirmButton = {
-                    TextButton(onClick = { dialog = false }) {
-                        Text(text = "OK")
-                    }
-                },
-                title = { Text(text = "Введите адрес") },
-                text = {
-                    OutlinedTextField(
-                        value = address,
-                        onValueChange = { address = it })
-                }
-            )
-        }
-        Row(modifier = Modifier.clickable { dialog = true }) {
-            Text(
-                text = stringResource(R.string.delivery) + (if (address.isEmpty()) "" else "\n" + address),
-                textDecoration = TextDecoration.Underline,
-                textAlign = TextAlign.Center
-            )
-            Icon(
-                imageVector = Icons.Default.KeyboardArrowDown,
-                contentDescription = null
-            )
-        }
         TopBarButton(false)
     }
 }

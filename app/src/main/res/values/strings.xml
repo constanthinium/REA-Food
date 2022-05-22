@@ -34,7 +34,6 @@
     <string name="reset">Reset Password</string>
     <string name="sent">A reset code has been sent to your email</string>
     <string name="enter">Enter code</string>
-    <string name="delivery">Delivery to</string>
     <string name="enter_name">Enter name</string>
     <string name="name">Name</string>
     <string name="enter_email">Enter email</string>
