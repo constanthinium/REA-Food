@@ -5,7 +5,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -17,6 +17,9 @@ import ru.rea.food.Product
 @ExperimentalMaterialApi
 @Composable
 fun ProductItem(product: Product, onClick: () -> Unit) {
+    var image by remember { mutableStateOf<String?>(null) }
+    ImageFinder.find(product.name) { image = it }
+
     Card(
         modifier = Modifier
             .padding(16.dp)
@@ -33,7 +36,7 @@ fun ProductItem(product: Product, onClick: () -> Unit) {
             verticalArrangement = Arrangement.SpaceEvenly
         ) {
             AsyncImage(
-                model = ImageFinder.find(product.name),
+                model = image,
                 contentDescription = null,
                 Modifier
                     .fillMaxWidth()

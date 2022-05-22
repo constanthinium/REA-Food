@@ -3,6 +3,7 @@ package ru.rea.food
 import android.os.StrictMode
 import android.os.StrictMode.ThreadPolicy
 import okhttp3.*
+import java.io.IOException
 
 object ImageFinder {
     private val client = OkHttpClient()
@@ -15,9 +16,17 @@ object ImageFinder {
         StrictMode.setThreadPolicy(policy)
     }
 
-    fun find(name: String): String {
+    fun find(name: String, onResponse: (String) -> Unit) {
         val request = Request.Builder().url(req.format(name)).build()
-        return findUrl(client.newCall(request).execute())
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                onResponse(findUrl(response))
+            }
+        })
     }
 
     private fun findUrl(response: Response): String {
