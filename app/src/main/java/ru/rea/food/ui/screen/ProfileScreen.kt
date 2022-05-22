@@ -44,7 +44,7 @@ fun ProfileScreen(token: String, viewModel: MainViewModel, onBack: () -> Unit) {
             onTextChange = { name = it },
             error = viewModel.errors?.firstname ?: ""
         )
-        Button(text = stringResource(R.string.name)) {
+        Button(text = stringResource(R.string.change_name)) {
             viewModel.changeName(token, name)
         }
         var email by remember { mutableStateOf(profile.email) }

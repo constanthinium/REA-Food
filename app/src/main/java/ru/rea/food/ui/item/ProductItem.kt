@@ -37,6 +37,7 @@ fun ProductItem(product: Product, onClick: () -> Unit) {
                 contentDescription = null,
                 Modifier
                     .fillMaxWidth()
+                    .fillMaxHeight(0.75f)
                     .padding(16.dp)
             )
             Text(

@@ -37,7 +37,7 @@ fun CartItem(entry: CartEntry, viewModel: MenuViewModel) {
             AsyncImage(
                 model = "${REAFoodService.baseUrl}/${product.photo}",
                 contentDescription = null,
-                Modifier.padding(16.dp)
+                Modifier.size(64.dp).padding(16.dp)
             )
             Column(verticalArrangement = Arrangement.SpaceEvenly) {
                 Text(text = product.name, fontWeight = FontWeight.Bold)

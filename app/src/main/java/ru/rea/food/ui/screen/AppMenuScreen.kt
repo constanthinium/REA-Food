@@ -62,11 +62,11 @@ fun AppMenuScreen(
             Text(text = email)
         }
         listOf(
-            R.drawable.ic_profile to "My profile",
-            R.drawable.ic_work to "Payment method",
-            R.drawable.ic_settings to "Settings",
-            R.drawable.ic_chat to "Help",
-            R.drawable.ic_paper to "Privacy policy",
+            R.drawable.ic_profile to "Мой профиль",
+            R.drawable.ic_work to "Способ оплаты",
+            R.drawable.ic_settings to "Настройки",
+            R.drawable.ic_chat to "Помощь",
+            R.drawable.ic_paper to "Политика конфеденциальности",
         ).forEachIndexed { i, it ->
             MenuItem(it, i != 2) {
                 when (i) {

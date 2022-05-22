@@ -48,8 +48,8 @@ fun CreateAccountScreen(nav: NavController, onSignUp: (String) -> Unit) {
         TextField(
             text = name,
             onTextChange = { name = it },
-            label = "Enter name",
-            title = "Name",
+            label = stringResource(R.string.enter_name),
+            title = stringResource(R.string.name),
             error = nameError
         )
         var email by remember { mutableStateOf("") }
@@ -57,8 +57,8 @@ fun CreateAccountScreen(nav: NavController, onSignUp: (String) -> Unit) {
         TextField(
             text = email,
             onTextChange = { email = it },
-            label = "Enter email",
-            title = "Email Address",
+            label = stringResource(R.string.enter_email),
+            title = stringResource(R.string.email_address),
             error = emailError
         )
         var password by remember { mutableStateOf("") }
@@ -66,8 +66,8 @@ fun CreateAccountScreen(nav: NavController, onSignUp: (String) -> Unit) {
         TextField(
             text = password,
             onTextChange = { password = it },
-            label = "Enter password",
-            title = "Password",
+            label = stringResource(R.string.enter_password),
+            title = stringResource(R.string.password),
             error = passwordError,
             visualTransformation = PasswordVisualTransformation(),
             keyboardType = KeyboardType.Password
@@ -77,7 +77,7 @@ fun CreateAccountScreen(nav: NavController, onSignUp: (String) -> Unit) {
         TextField(
             text = confirm,
             onTextChange = { confirm = it },
-            label = "Confirm Password",
+            label = stringResource(R.string.confirm),
             error = confirmError,
             visualTransformation = PasswordVisualTransformation(),
             keyboardType = KeyboardType.Password
@@ -93,7 +93,7 @@ fun CreateAccountScreen(nav: NavController, onSignUp: (String) -> Unit) {
             AccountButtons(
                 onCreate = {
                     if (password != confirm) {
-                        confirmError = "Passwords don't match"
+                        confirmError = "Пароли не совпадают"
                         return@AccountButtons
                     }
                     REAFoodService.instance.signUp(Account(name, email, password, deviceId)).enqueue(
@@ -114,7 +114,7 @@ fun CreateAccountScreen(nav: NavController, onSignUp: (String) -> Unit) {
                             }
 
                             override fun onFailure(call: Call<AccountResponse>, t: Throwable) {
-                                Toast.makeText(context, "Connection error", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(context, context.getString(R.string.error), Toast.LENGTH_SHORT).show()
                             }
                         })
                 },

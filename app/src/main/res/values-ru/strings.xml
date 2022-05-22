@@ -29,11 +29,16 @@
     <string name="enjoy">Наслаждайтесь вкусной едой</string>
     <string name="login">войти</string>
     <string name="profile">Мой профиль</string>
-    <string name="name">Изменить имя</string>
+    <string name="change_name">Изменить имя</string>
     <string name="change_email">Изменить адрес</string>
     <string name="change_password">Изменить пароль</string>
     <string name="reset">Сбросить Пароль</string>
     <string name="sent">На вашу электронную почту был отправлен код сброса</string>
     <string name="enter">Введите код</string>
     <string name="delivery">Доставка в</string>
+    <string name="enter_name">Введите имя</string>
+    <string name="name">Имя</string>
+    <string name="enter_email">Введите почту</string>
+    <string name="email_address">Почтовый Адрес</string>
+    <string name="confirm">Подтвердите Пароль</string>
 </resources>
