@@ -88,7 +88,7 @@ fun CreateAccountScreen(nav: NavController, onSignUp: (String) -> Unit) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            val deviceId = getAndroidId()
+            val deviceId = HardwareId.get()
             val context = LocalContext.current
             AccountButtons(
                 onCreate = {
