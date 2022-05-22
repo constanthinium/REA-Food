@@ -11,8 +11,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import ru.rea.food.ImageFinder
 import ru.rea.food.Product
-import ru.rea.food.REAFoodService
 
 @ExperimentalMaterialApi
 @Composable
@@ -33,7 +33,7 @@ fun ProductItem(product: Product, onClick: () -> Unit) {
             verticalArrangement = Arrangement.SpaceEvenly
         ) {
             AsyncImage(
-                model = "${REAFoodService.baseUrl}/${product.photo}",
+                model = ImageFinder.find(product.name),
                 contentDescription = null,
                 Modifier
                     .fillMaxWidth()
