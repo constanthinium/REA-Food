@@ -17,6 +17,15 @@ import androidx.compose.ui.unit.dp
 import ru.rea.food.Category
 import ru.rea.food.R
 
+val icons = mapOf(
+    "Выпечка" to R.drawable.ic_baseline_bakery_dining_24,
+    "Горячие напитки" to R.drawable.ic_baseline_local_cafe_24,
+    "Десерты" to R.drawable.ic_baseline_cake_24,
+    "Пицца" to R.drawable.ic_baseline_local_pizza_24,
+    "Салаты" to R.drawable.ic_baseline_dinner_dining_24,
+    "Холодные напитки" to R.drawable.ic_baseline_local_drink_24
+)
+
 @Composable
 fun CategoryItem(category: Category, selected: Boolean = false, onClick: (Int) -> Unit) {
     val colors = if (selected) {
@@ -39,7 +48,7 @@ fun CategoryItem(category: Category, selected: Boolean = false, onClick: (Int) -
         verticalArrangement = Arrangement.SpaceEvenly
     ) {
         Icon(
-            painter = painterResource(id = R.drawable.ic_baseline_fastfood_24),
+            painter = painterResource(id = icons[category.name] ?: R.drawable.ic_baseline_fastfood_24),
             contentDescription = null
         )
         Spacer(modifier = Modifier.height(16.dp))
