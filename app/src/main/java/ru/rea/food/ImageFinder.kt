@@ -1,7 +1,5 @@
 package ru.rea.food
 
-import android.os.StrictMode
-import android.os.StrictMode.ThreadPolicy
 import okhttp3.*
 import java.io.IOException
 
@@ -10,11 +8,6 @@ object ImageFinder {
 
     private const val req = "https://www.google.com/search?q=%s&tbm=isch"
     private const val attr = "src"
-
-    init {
-        val policy = ThreadPolicy.Builder().permitNetwork().build()
-        StrictMode.setThreadPolicy(policy)
-    }
 
     fun find(name: String, onResponse: (String) -> Unit) {
         val request = Request.Builder().url(req.format(name)).build()
