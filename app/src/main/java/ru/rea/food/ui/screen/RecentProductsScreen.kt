@@ -11,12 +11,14 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import ru.rea.food.OrderWrapper
 import ru.rea.food.Product
+import ru.rea.food.R
 import ru.rea.food.REAFoodService
 import ru.rea.food.ui.item.ProductItem
 
@@ -57,7 +59,7 @@ fun RecentProductsScreen(token: String, onClick: (Product) -> Unit) {
                 it.forEach { it.order.products.forEach { products.add(it.product) } }
                 LazyColumn {
                     items(products) {
-                        if(it.desc == "Товар временно отсутствует") {
+                        if (it.desc == stringResource(id = R.string.missing)) {
                             ProductItem(product = it) {
                                 Toast.makeText(context, it.desc, Toast.LENGTH_SHORT).show()}
                         } else {

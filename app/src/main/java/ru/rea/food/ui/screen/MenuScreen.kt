@@ -137,11 +137,12 @@ fun MenuScreen(place: Int, token: String, nav: NavController) {
                         }
                     }
                     val context = LocalContext.current
+                    val missing = stringResource(id = R.string.missing)
                     LazyRow(Modifier.weight(1f))
                     {
                         items(viewModel.products) {
                             ProductItem(it) {
-                                if (it.desc != "Товар временно отсутствует") {
+                                if (it.desc != missing) {
                                     product = it
                                 } else {
                                     Toast.makeText(context, it.desc, Toast.LENGTH_SHORT).show()
