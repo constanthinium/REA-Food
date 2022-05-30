@@ -17,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import ru.rea.food.Product
 import ru.rea.food.REAFoodService
@@ -70,8 +69,11 @@ fun ProductScreen(
                 modifier = Modifier.fillMaxWidth()
             )
             Text(text = product.desc)
+            val scope = rememberCoroutineScope()
             Button(text = "Add to cart") {
-                GlobalScope.launch { REAFoodService.instance.cart("Bearer $token", product.id, count) }
+                scope.launch {
+                    REAFoodService.instance.cart("Bearer $token", product.id, count)
+                }
                 onBack()
             }
         }
