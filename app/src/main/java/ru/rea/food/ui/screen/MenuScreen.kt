@@ -1,7 +1,6 @@
 package ru.rea.food.ui.screen
 
 import android.util.Log
-import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -13,7 +12,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -22,6 +20,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import ru.rea.food.Product
 import ru.rea.food.R
+import ru.rea.food.ui.MissingDialog
 import ru.rea.food.ui.item.CategoryItem
 import ru.rea.food.ui.item.ProductItem
 import ru.rea.food.ui.topbar.TopAppBar
@@ -136,16 +135,21 @@ fun MenuScreen(place: Int, token: String, nav: NavController) {
                             }
                         }
                     }
-                    val context = LocalContext.current
                     val missing = stringResource(id = R.string.missing)
+                    var missingDialog by remember { mutableStateOf(false) }
+                    if (missingDialog) {
+                        MissingDialog(missing) {
+                            missingDialog = false
+                        }
+                    }
                     LazyRow(Modifier.weight(1f))
                     {
                         items(viewModel.products) {
                             ProductItem(it) {
-                                if (it.desc != missing) {
-                                    product = it
+                                if (it.desc == missing) {
+                                    missingDialog = true
                                 } else {
-                                    Toast.makeText(context, it.desc, Toast.LENGTH_SHORT).show()
+                                    product = it
                                 }
                             }
                         }

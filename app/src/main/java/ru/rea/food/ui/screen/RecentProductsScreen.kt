@@ -61,7 +61,8 @@ fun RecentProductsScreen(token: String, onClick: (Product) -> Unit) {
                     items(products) {
                         if (it.desc == stringResource(id = R.string.missing)) {
                             ProductItem(product = it) {
-                                Toast.makeText(context, it.desc, Toast.LENGTH_SHORT).show()}
+                                Toast.makeText(context, it.desc, Toast.LENGTH_SHORT).show()
+                            }
                         } else {
                             ProductItem(product = it) { onClick(it) }
                         }
