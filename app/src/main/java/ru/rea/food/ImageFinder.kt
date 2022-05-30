@@ -7,16 +7,19 @@ import okhttp3.*
 import java.io.IOException
 
 object ImageFinder {
-    lateinit var preferences: SharedPreferences
     const val TAG = "ImageFinder"
-    private const val req = "https://www.google.com/search?q=%s&tbm=isch"
     private val client = OkHttpClient()
+    lateinit var preferences: SharedPreferences
+    private const val schema = "https://"
     private const val attr = "src"
+    private const val postfix = "&amp;s"
+    private const val req = "${schema}www.google.com/search?q=%s&tbm=isch"
+    private const val prefix = "${schema}encrypted-tbn0.gstatic.com/images?q=tbn:ANd9Gc"
 
     fun find(name: String, onResponse: (String) -> Unit) {
-        preferences.getString(name, null)?.let {
+        preferences.getString(name.replace("\"", ""), null)?.let {
             Log.d(TAG, "find: $name loaded from cache")
-            onResponse(it)
+            onResponse(prefix + it)
         } ?: run {
             val request = Request.Builder().url(req.format(name)).build()
             client.newCall(request).enqueue(object : Callback {
@@ -27,7 +30,8 @@ object ImageFinder {
                 override fun onResponse(call: Call, response: Response) {
                     val image = findUrl(response)
                     Log.d(TAG, "onResponse: $image")
-                    preferences.edit { putString(name, image) }
+                    val truncated = image.drop(prefix.length).dropLast(postfix.length)
+                    preferences.edit { putString(name.replace("\"", ""), truncated) }
                     Log.d(TAG, "onResponse: $name cached")
                     onResponse(image)
                 }
