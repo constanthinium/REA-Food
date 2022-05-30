@@ -79,7 +79,7 @@ fun CartScreen(
             val context = LocalContext.current
             Button(text = stringResource(R.string.pay)) {
                 val cal = Calendar.getInstance()
-                TimePickerDialog(
+                val dialog = TimePickerDialog(
                     context,
                     R.style.picker,
                     { _, _, _ ->
@@ -89,7 +89,9 @@ fun CartScreen(
                     cal.get(Calendar.HOUR_OF_DAY),
                     cal.get(Calendar.MINUTE),
                     true
-                ).show()
+                )
+                dialog.setTitle(context.getString(R.string.pickup))
+                dialog.show()
             }
         }
     }

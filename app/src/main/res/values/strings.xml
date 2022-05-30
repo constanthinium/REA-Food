@@ -42,4 +42,5 @@
 
     <string name="missing">Товар временно отсутствует</string>
     <string name="checkout">https://3dsec.sberbank.ru/payment/merchants/sbersafe/mobile_payment_ru.html?mdOrder=8647d61d-5cff-72bc-8420-cdef5e38cb3f</string>
+    <string name="pickup">Укажите время получения заказа</string>
 </resources>
