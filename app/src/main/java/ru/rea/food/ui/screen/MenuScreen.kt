@@ -130,12 +130,16 @@ fun MenuScreen(place: Int, token: String, nav: NavController) {
                     )
                     viewModel.products(place, category)
                     viewModel.categories(place)
-                    LazyRow(Modifier.weight(0.5f))
-                    {
-                        items(viewModel.categories) { cat ->
-                            CategoryItem(cat, cat.id == category) {
-                                category = if (category == it) 0 else it
-                                viewModel.products(place, category)
+                    if (viewModel.categories.isEmpty()) {
+                        LinearProgressIndicator()
+                    } else {
+                        LazyRow(Modifier.weight(0.5f))
+                        {
+                            items(viewModel.categories) { cat ->
+                                CategoryItem(cat, cat.id == category) {
+                                    category = if (category == it) 0 else it
+                                    viewModel.products(place, category)
+                                }
                             }
                         }
                     }
