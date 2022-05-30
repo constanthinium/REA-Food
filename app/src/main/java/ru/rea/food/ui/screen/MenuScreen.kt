@@ -38,6 +38,7 @@ fun MenuScreen(place: Int, token: String, nav: NavController) {
 
     var product by remember { mutableStateOf<Product?>(null) }
     var navItem by remember { mutableStateOf(0) }
+    var category by remember { mutableStateOf(0) }
 
     when (navItem) {
         0 -> product?.let {
@@ -127,7 +128,6 @@ fun MenuScreen(place: Int, token: String, nav: NavController) {
                             .fillMaxWidth()
                             .padding(16.dp)
                     )
-                    var category by remember { mutableStateOf(0) }
                     viewModel.products(place, category)
                     viewModel.categories(place)
                     LazyRow(Modifier.weight(0.5f))
