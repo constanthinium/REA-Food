@@ -38,7 +38,9 @@ fun MenuScreen(place: Int, token: String, nav: NavController) {
     var navItem by remember { mutableStateOf(0) }
 
     if (navItem == 0) {
-        if (product == null) {
+        product?.let {
+            ProductScreen(it, token) { product = null }
+        } ?: run {
             Scaffold(
                 topBar = {
                     TopAppBar(onClick = {
@@ -156,8 +158,6 @@ fun MenuScreen(place: Int, token: String, nav: NavController) {
                     }
                 }
             }
-        } else {
-            ProductScreen(product, token) { product = null }
         }
     } else if (navItem == 1) {
         RecentProductsScreen(token) {

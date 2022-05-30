@@ -24,12 +24,12 @@ import ru.rea.food.ui.topbar.TopAppBar
 
 @Composable
 fun ProductScreen(
-    product: Product?,
+    product: Product,
     token: String,
     onBack: () -> Unit
 ) {
     var image by remember { mutableStateOf<String?>(null) }
-    ImageFinder.find(product!!.name) { image = it }
+    ImageFinder.find(product.name) { image = it }
     BackHandler { onBack() }
 
     Column(
