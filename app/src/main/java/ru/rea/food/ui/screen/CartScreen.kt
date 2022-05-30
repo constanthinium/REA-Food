@@ -87,34 +87,14 @@ fun CartScreen(
                 TimePickerDialog(
                     context,
                     R.style.picker,
-                    { _, hour, minute ->
-                        cal.set(Calendar.HOUR_OF_DAY, hour)
-                        cal.set(Calendar.MINUTE, minute)
-                        cal.set(Calendar.SECOND, 0)
-                        val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-                        val time = formatter.format(cal.time)
-                        Log.d(TAG, "CartScreen: $time")
-                        GlobalScope.launch {
-                            // TODO: make a real checkout
-//                            val checkout = REAFoodService.instance.checkout(
-//                                "Bearer ${viewModel.token}",
-//                                time
-//                            )
-                            val checkout =
-                                Checkout("https://3dsec.sberbank.ru/payment/merchants/sbersafe/mobile_payment_ru.html?mdOrder=8647d61d-5cff-72bc-8420-cdef5e38cb3f")
-                            context.startActivity(
-                                Intent(
-                                    Intent.ACTION_VIEW,
-                                    Uri.parse(checkout.url)
-                                )
-                            )
-                        }
+                    { _, _, _ ->
+                        val checkout = context.getString(R.string.checkout)
+                        context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(checkout)))
                     },
                     cal.get(Calendar.HOUR_OF_DAY),
                     cal.get(Calendar.MINUTE),
                     true
                 ).show()
-
             }
         }
     }
