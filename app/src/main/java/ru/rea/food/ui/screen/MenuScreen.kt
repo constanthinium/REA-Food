@@ -6,6 +6,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -33,6 +34,7 @@ private const val TAG = "MenuScreen"
 @Composable
 fun MenuScreen(place: Int, token: String, nav: NavController) {
     val viewModel = viewModel<MenuViewModel>(factory = MenuViewModelFactory(token))
+    val state = rememberLazyListState()
 
     var product by remember { mutableStateOf<Product?>(null) }
     var navItem by remember { mutableStateOf(0) }
@@ -144,7 +146,7 @@ fun MenuScreen(place: Int, token: String, nav: NavController) {
                             missingDialog = false
                         }
                     }
-                    LazyRow(Modifier.weight(1f))
+                    LazyRow(Modifier.weight(1f), state = state)
                     {
                         items(viewModel.products) {
                             ProductItem(it) {
