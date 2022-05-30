@@ -19,7 +19,6 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import ru.rea.food.CartEntry
 import ru.rea.food.ImageFinder
-import ru.rea.food.REAFoodService
 import ru.rea.food.vm.MenuViewModel
 
 @Composable

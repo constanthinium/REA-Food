@@ -3,7 +3,6 @@ package ru.rea.food.ui.screen
 import android.app.TimePickerDialog
 import android.content.Intent
 import android.net.Uri
-import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -20,15 +19,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import ru.rea.food.Checkout
 import ru.rea.food.R
 import ru.rea.food.ui.Button
 import ru.rea.food.ui.item.CartItem
 import ru.rea.food.ui.topbar.TopAppBar
 import ru.rea.food.vm.MenuViewModel
-import java.text.SimpleDateFormat
 import java.util.*
 
 private const val TAG = "CartScreen"
