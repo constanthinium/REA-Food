@@ -5,10 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.*
@@ -18,6 +15,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import kotlinx.coroutines.launch
+import ru.rea.food.ImageFinder
 import ru.rea.food.Product
 import ru.rea.food.REAFoodService
 import ru.rea.food.ui.Button
@@ -30,6 +28,8 @@ fun ProductScreen(
     token: String,
     onBack: () -> Unit
 ) {
+    var image by remember { mutableStateOf<String?>(null) }
+    ImageFinder.find(product!!.name) { image = it }
     BackHandler { onBack() }
 
     Column(
@@ -54,16 +54,21 @@ fun ProductScreen(
                 shape = RoundedCornerShape(20.dp),
                 elevation = 32.dp
             ) {
-                AsyncImage(
-                    model = "${REAFoodService.baseUrl}/${product!!.photo}",
-                    contentDescription = null,
-                    Modifier.padding(32.dp)
-                )
+                Box(contentAlignment = Alignment.Center) {
+                    CircularProgressIndicator()
+                    AsyncImage(
+                        model = image,
+                        contentDescription = null,
+                        Modifier
+                            .fillMaxSize()
+                            .padding(32.dp)
+                    )
+                }
             }
             var count by remember { mutableStateOf(1) }
             CountCard(count) { count = it }
             Text(
-                text = product!!.name,
+                text = product.name,
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.h5,
                 modifier = Modifier.fillMaxWidth()
