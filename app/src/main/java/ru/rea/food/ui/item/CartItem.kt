@@ -6,9 +6,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -17,11 +18,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import ru.rea.food.CartEntry
+import ru.rea.food.ImageFinder
 import ru.rea.food.REAFoodService
 import ru.rea.food.vm.MenuViewModel
 
 @Composable
 fun CartItem(entry: CartEntry, viewModel: MenuViewModel) {
+    var image by remember { mutableStateOf<String?>(null) }
+    ImageFinder.find(entry.product.name) { image = it }
+
     Card(
         Modifier
             .height(96.dp)
@@ -34,11 +39,15 @@ fun CartItem(entry: CartEntry, viewModel: MenuViewModel) {
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             val product = entry.product
-            AsyncImage(
-                model = "${REAFoodService.baseUrl}/${product.photo}",
-                contentDescription = null,
-                Modifier.size(64.dp).padding(16.dp)
-            )
+            image?.let {
+                AsyncImage(
+                    model = image,
+                    contentDescription = null,
+                    Modifier
+                        .size(64.dp)
+                        .padding(16.dp)
+                )
+            } ?: CircularProgressIndicator()
             Column(verticalArrangement = Arrangement.SpaceEvenly) {
                 Text(text = product.name, fontWeight = FontWeight.Bold)
                 Text(
