@@ -25,7 +25,7 @@ fun ResetPasswordScreen() {
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        TopAccountBar(text = stringResource(R.string.cancel))
+        TopAccountBar(text = stringResource(android.R.string.cancel))
         Spacer(modifier = Modifier.weight(1f))
         Text(text = stringResource(R.string.reset), style = MaterialTheme.typography.h5)
         Spacer(modifier = Modifier.height(16.dp))

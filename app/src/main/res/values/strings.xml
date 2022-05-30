@@ -22,7 +22,6 @@
     <string name="welcome">Welcome friend, enter your details so lets get started in ordering food.</string>
     <string name="login_my">Login to my account</string>
     <string name="google">Sign-in with Google</string>
-    <string name="cancel">Cancel</string>
     <string name="forgot">Forgot password</string>
     <string name="request">Enter your email address to request a password reset.</string>
     <string name="enjoy">Enjoy Delicious food</string>

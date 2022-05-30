@@ -32,7 +32,7 @@ fun AppMenuScreen(
             onDismissRequest = { dialogContent = null },
             confirmButton = {
                 TextButton(onClick = { dialogContent = null }) {
-                    Text(text = "OK")
+                    Text(text = stringResource(android.R.string.ok))
                 }
             },
             title = { Text(text = it.first) },

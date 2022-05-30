@@ -23,7 +23,7 @@ fun ForgotPasswordScreen(onClick: () -> Unit) {
             .padding(dimensionResource(id = R.dimen.content_padding)),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        TopAccountBar(text = stringResource(R.string.cancel))
+        TopAccountBar(text = stringResource(android.R.string.cancel))
         Spacer(Modifier.weight(1f))
         Text(text = stringResource(R.string.forgot), style = MaterialTheme.typography.h5)
         Spacer(Modifier.height(20.dp))
