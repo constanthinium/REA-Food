@@ -37,8 +37,8 @@ fun MenuScreen(place: Int, token: String, nav: NavController) {
     var product by remember { mutableStateOf<Product?>(null) }
     var navItem by remember { mutableStateOf(0) }
 
-    if (navItem == 0) {
-        product?.let {
+    when (navItem) {
+        0 -> product?.let {
             ProductScreen(it, token) { product = null }
         } ?: run {
             Scaffold(
@@ -159,18 +159,15 @@ fun MenuScreen(place: Int, token: String, nav: NavController) {
                 }
             }
         }
-    } else if (navItem == 1) {
-        RecentProductsScreen(token) {
+        1 -> RecentProductsScreen(token) {
             product = it
             navItem = 0
         }
-    } else if (navItem == 2) {
-        SearchScreen(viewModel) {
+        2 -> SearchScreen(viewModel) {
             product = it
             navItem = 0
         }
-    } else if (navItem == 3) {
-        Column(modifier = Modifier.padding(16.dp)) {
+        3 -> Column(modifier = Modifier.padding(16.dp)) {
             Text(text = "Уведомления", style = MaterialTheme.typography.h5)
             Box(
                 modifier = Modifier.fillMaxSize(),
@@ -179,7 +176,6 @@ fun MenuScreen(place: Int, token: String, nav: NavController) {
                 Text(text = "У вас пока нет уведомлений", style = MaterialTheme.typography.h5)
             }
         }
-    } else if (navItem == 4) {
-        CartScreen(viewModel) { navItem = 0 }
+        4 -> CartScreen(viewModel) { navItem = 0 }
     }
 }
