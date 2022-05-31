@@ -72,6 +72,7 @@ class MainActivity : ComponentActivity() {
                         composable("profile") {
                             ProfileScreen(token!!, viewModel) { nav.popBackStack() }
                         }
+                        composable("checkout") { CheckoutScreen(nav) }
                     }
                 }
             }

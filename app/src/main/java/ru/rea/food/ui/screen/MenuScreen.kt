@@ -182,6 +182,8 @@ fun MenuScreen(place: Int, token: String, nav: NavController) {
                 Text(text = "У вас пока нет уведомлений", style = MaterialTheme.typography.h5)
             }
         }
-        4 -> CartScreen(viewModel) { navItem = 0 }
+        4 -> CartScreen(viewModel, {
+            nav.navigate("checkout")
+        }) { navItem = 0 }
     }
 }

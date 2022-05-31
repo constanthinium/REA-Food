@@ -1,8 +1,5 @@
 package ru.rea.food.ui.screen
 
-import android.app.TimePickerDialog
-import android.content.Intent
-import android.net.Uri
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -14,7 +11,6 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -24,13 +20,11 @@ import ru.rea.food.ui.Button
 import ru.rea.food.ui.item.CartItem
 import ru.rea.food.ui.topbar.TopAppBar
 import ru.rea.food.vm.MenuViewModel
-import java.util.*
-
-private const val TAG = "CartScreen"
 
 @Composable
 fun CartScreen(
     viewModel: MenuViewModel,
+    onCheckout: () -> Unit,
     onExit: () -> Unit
 ) {
     Column(
@@ -76,22 +70,8 @@ fun CartScreen(
                     fontWeight = FontWeight.Bold
                 )
             }
-            val context = LocalContext.current
             Button(text = stringResource(R.string.pay)) {
-                val cal = Calendar.getInstance()
-                val dialog = TimePickerDialog(
-                    context,
-                    R.style.picker,
-                    { _, _, _ ->
-                        val checkout = context.getString(R.string.checkout)
-                        context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(checkout)))
-                    },
-                    cal.get(Calendar.HOUR_OF_DAY),
-                    cal.get(Calendar.MINUTE),
-                    true
-                )
-                dialog.setTitle(context.getString(R.string.pickup))
-                dialog.show()
+                onCheckout()
             }
         }
     }
