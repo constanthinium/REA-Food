@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
@@ -22,7 +23,8 @@ fun TextField(
     title: String = label,
     error: String = "",
     visualTransformation: VisualTransformation = VisualTransformation.None,
-    keyboardType: KeyboardType = KeyboardType.Text
+    keyboardType: KeyboardType = KeyboardType.Text,
+    capitalize: Boolean = false
 ) {
     Column(horizontalAlignment = Alignment.Start) {
         Spacer(Modifier.height(12.dp))
@@ -38,7 +40,12 @@ fun TextField(
             label = { Text(text = error.ifEmpty { label }) },
             isError = error.isNotEmpty(),
             visualTransformation = visualTransformation,
-            keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
+            keyboardOptions = KeyboardOptions(
+                capitalization = if (capitalize) {
+                    KeyboardCapitalization.Sentences
+                } else KeyboardCapitalization.None,
+                keyboardType = keyboardType
+            ),
             singleLine = true,
             shape = RoundedCornerShape(16.dp),
             colors = TextFieldDefaults.outlinedTextFieldColors(
