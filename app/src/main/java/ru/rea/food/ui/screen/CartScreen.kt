@@ -70,8 +70,14 @@ fun CartScreen(
                     fontWeight = FontWeight.Bold
                 )
             }
-            Button(text = stringResource(R.string.pay)) {
-                onCheckout()
+            viewModel.cart?.let {
+                if (it.items.isEmpty()) {
+                    Button(text = "Сначала добавьте блюда в корзину!") { }
+                } else {
+                    Button(text = stringResource(R.string.pay)) {
+                        onCheckout()
+                    }
+                }
             }
         }
     }
