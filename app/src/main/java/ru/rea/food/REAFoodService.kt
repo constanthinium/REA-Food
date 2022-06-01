@@ -1,6 +1,7 @@
 package ru.rea.food
 
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
@@ -81,10 +82,12 @@ interface REAFoodService {
     @GET("orders")
     fun orders(@Header("Authorization") token: String) : Call<List<OrderWrapper>>
 
+    @POST("clearCart")
+    suspend fun clearCart(@Header("Authorization") token: String): Response<Void>
+
     companion object {
-        const val baseUrl = "https://eda.ucmpt.ru"
         val instance: REAFoodService = Retrofit.Builder()
-            .baseUrl("$baseUrl/api/")
+            .baseUrl("https://eda.ucmpt.ru/api/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(REAFoodService::class.java)

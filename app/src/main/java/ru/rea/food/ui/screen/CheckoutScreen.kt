@@ -1,9 +1,9 @@
 package ru.rea.food.ui.screen
 
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.icu.util.GregorianCalendar
+import android.util.Log
 import android.widget.DatePicker
 import android.widget.TimePicker
 import androidx.appcompat.view.ContextThemeWrapper
@@ -18,31 +18,32 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.text.isDigitsOnly
 import androidx.navigation.NavController
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.qrcode.QRCodeWriter
+import kotlinx.coroutines.launch
 import ru.rea.food.R
+import ru.rea.food.REAFoodService
 import ru.rea.food.ui.Button
 import ru.rea.food.ui.TextField
 import ru.rea.food.ui.topbar.TopAppBar
 import java.util.*
+
+private const val TAG = "CheckoutScreen"
 
 private const val CARD = 16
 private const val EXP = 4
 private const val VER = 3
 
 @Composable
-fun CheckoutScreen(nav: NavController) {
+fun CheckoutScreen(token: String, nav: NavController) {
     var dialog by remember { mutableStateOf("") }
 
     Column(
@@ -144,12 +145,16 @@ fun CheckoutScreen(nav: NavController) {
                 }
             )
         }
+        val scope = rememberCoroutineScope()
         Button("Оплатить") {
             if (card.length < CARD) dialog = "Номер карты должен состоять из $CARD цифр"
             else if (exp.length < EXP) dialog = "Срок действия должен состоять из $EXP цифр"
             else if (ver.length < VER) dialog = "CVV должен состоять из $VER цифр"
-            else code = UUID.randomUUID()
-            code = UUID.randomUUID()
+            else scope.launch {
+                val res = REAFoodService.instance.clearCart("Bearer $token")
+                Log.d(TAG, "CheckoutScreen: $res")
+                code = UUID.randomUUID()
+            }
         }
     }
 }
