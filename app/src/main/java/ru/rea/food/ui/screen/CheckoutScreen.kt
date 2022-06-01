@@ -130,7 +130,7 @@ fun CheckoutScreen(nav: NavController) {
             AlertDialog(
                 onDismissRequest = {},
                 confirmButton = {
-                    TextButton(onClick = { nav.navigate("restaurants") }) {
+                    TextButton(onClick = { nav.popBackStack("restaurants", false) }) {
                         Text(text = "Выйти в главное меню")
                     }
                 },
