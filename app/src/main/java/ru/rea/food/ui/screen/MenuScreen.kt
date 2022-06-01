@@ -34,11 +34,13 @@ private const val TAG = "MenuScreen"
 @Composable
 fun MenuScreen(place: Int, token: String, nav: NavController) {
     val viewModel = viewModel<MenuViewModel>(factory = MenuViewModelFactory(token))
-    val state = rememberLazyListState()
 
     var product by remember { mutableStateOf<Product?>(null) }
     var navItem by remember { mutableStateOf(0) }
     var category by remember { mutableStateOf(0) }
+
+    val dishesState = rememberLazyListState()
+    val catsState = rememberLazyListState()
 
     when (navItem) {
         0 -> product?.let {
@@ -133,7 +135,7 @@ fun MenuScreen(place: Int, token: String, nav: NavController) {
                     if (viewModel.categories.isEmpty()) {
                         LinearProgressIndicator()
                     } else {
-                        LazyRow(Modifier.weight(0.5f))
+                        LazyRow(Modifier.weight(0.5f), state = catsState)
                         {
                             items(viewModel.categories) { cat ->
                                 CategoryItem(cat, cat.id == category) {
@@ -150,7 +152,7 @@ fun MenuScreen(place: Int, token: String, nav: NavController) {
                             missingDialog = false
                         }
                     }
-                    LazyRow(Modifier.weight(1f), state = state)
+                    LazyRow(Modifier.weight(1f), state = dishesState)
                     {
                         items(viewModel.products) {
                             ProductItem(it) {
