@@ -1,6 +1,5 @@
 package ru.rea.food.ui.screen
 
-import android.content.SharedPreferences
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -12,7 +11,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.core.content.edit
 import androidx.navigation.NavController
 import ru.rea.food.R
 import ru.rea.food.ui.Button
@@ -22,9 +20,9 @@ import ru.rea.food.vm.MainViewModel
 @Composable
 fun AppMenuScreen(
     nav: NavController,
-    prefs: SharedPreferences,
     viewModel: MainViewModel,
-    token: String
+    token: String,
+    onLogout: () -> Unit
 ) {
     var dialogContent by remember { mutableStateOf<Pair<String, String>?>(null) }
     dialogContent?.let {
@@ -87,12 +85,7 @@ fun AppMenuScreen(
             }
         }
         Spacer(modifier = Modifier)
-        Button(text = stringResource(R.string.logout), fmw = false) {
-            prefs.edit { remove("token") }
-            nav.navigate("login") {
-                popUpTo(0)
-            }
-        }
+        Button(text = stringResource(R.string.logout), fmw = false, onLogout)
         Spacer(modifier = Modifier)
     }
 }

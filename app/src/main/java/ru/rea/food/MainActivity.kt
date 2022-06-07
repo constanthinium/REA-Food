@@ -35,6 +35,7 @@ class MainActivity : ComponentActivity() {
                     val prefs = getPreferences(Context.MODE_PRIVATE)
                     val token = prefs.getString("token", null)
                     val onLogIn: (String) -> Unit = { prefs.edit { putString("token", it) } }
+                    val getToken = { getPreferences(Context.MODE_PRIVATE).getString("token", "")!! }
                     val viewModel = viewModel<MainViewModel>()
                     if (viewModel.error) {
                         AlertDialog(
@@ -65,14 +66,24 @@ class MainActivity : ComponentActivity() {
                             route = "menu/{placeId}",
                             arguments = listOf(navArgument("placeId") { type = NavType.IntType })
                         ) {
-                            MenuScreen(it.arguments!!.getInt("placeId"), token!!, nav)
+                            MenuScreen(it.arguments!!.getInt("placeId"), getToken(), nav)
                         }
                         composable("restaurants") { RestaurantsScreen(nav, viewModel) }
-                        composable("appMenu") { AppMenuScreen(nav, prefs, viewModel, token!!) }
-                        composable("profile") {
-                            ProfileScreen(token!!, viewModel) { nav.popBackStack() }
+                        composable("appMenu") {
+                            val t = getToken()
+                            if (t.isNotEmpty()) {
+                                AppMenuScreen(nav, viewModel, t) {
+                                    prefs.edit { remove("token") }
+                                    nav.navigate("login") {
+                                        popUpTo(0)
+                                    }
+                                }
+                            }
                         }
-                        composable("checkout") { CheckoutScreen(token!!, nav) }
+                        composable("profile") {
+                            ProfileScreen(getToken(), viewModel) { nav.popBackStack() }
+                        }
+                        composable("checkout") { CheckoutScreen(getToken(), nav) }
                     }
                 }
             }
