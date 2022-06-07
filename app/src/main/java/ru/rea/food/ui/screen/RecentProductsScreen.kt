@@ -32,6 +32,7 @@ fun RecentProductsScreen(token: String, onClick: (Product) -> Unit) {
             style = MaterialTheme.typography.h5
         )
         var orders by remember { mutableStateOf<List<OrderWrapper>?>(null) }
+        val context = LocalContext.current
         REAFoodService.instance.orders("Bearer $token")
             .enqueue(object : Callback<List<OrderWrapper>> {
                 override fun onResponse(
@@ -42,7 +43,7 @@ fun RecentProductsScreen(token: String, onClick: (Product) -> Unit) {
                 }
 
                 override fun onFailure(call: Call<List<OrderWrapper>>, t: Throwable) {
-                    TODO("Not yet implemented")
+                    Toast.makeText(context, t.message, Toast.LENGTH_SHORT).show()
                 }
             })
         orders?.let {
